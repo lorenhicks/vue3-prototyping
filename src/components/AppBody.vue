@@ -1,12 +1,17 @@
 <template>
   <div>
-    <ul v-for="(volunteer, v) in this.$store.state.volunteers" :key="v" class="list-format flex-container">
+    <ul v-for="(volunteer, v) in this.$store.state.volunteers" :key="v" @mouseover="this.$store.state.hover = true"
+    @mouseleave="this.$store.state.hover = false" class="list-format flex-container">
         <li>
           <div>Database Entry: {{ v }}</div>
-          {{ volunteer.name }} | {{ volunteer.pronouns }} | Badge #: {{ volunteer.id }} - County: {{ volunteer.county }}
-          <img alt="Profile Photo" :src="require('@/assets/' + volunteer.name.toLowerCase() + '.jpg')" class="profile-styling" @mouseover="this.$store.state.hover = true"
-    @mouseleave="this.$store.state.hover = false">
-    <span v-if="this.$store.state.hover"> This volunteer is {{ volunteer.active }}.</span>
+          <div>
+          {{ volunteer.name }} | {{ volunteer.pronouns }}
+          </div>
+          <div>
+            Badge #: {{ volunteer.id }} - County: {{ volunteer.county }}
+          </div>
+          <img alt="Profile Photo" :src="require('@/assets/' + volunteer.name.toLowerCase() + '.jpg')" class="profile-styling">
+    <span v-if="this.$store.state.hover" class="active-style"> Status: {{ volunteer.active.toUpperCase() }}</span>
         </li>
     </ul>
   </div>
@@ -40,5 +45,11 @@ export default {
   .profile-styling {
     padding: 10px;
     box-shadow: 2px 2px 2px 1px rgba(1, 1, 61, 0.2);
+  }
+  .active-style {
+    position: relative;
+    top: -20px;
+    left: 40px;
+    text-align: center;
   }
 </style>
