@@ -1,40 +1,22 @@
 <template>
   <div>
-    <ul v-for="(volunteer, v) in volunteers" :key="v" class="list-format flex-container">
+    <ul v-for="(volunteer, v) in this.$store.state.volunteers" :key="v" class="list-format flex-container">
         <li>
           <div>Database Entry: {{ v }}</div>
           {{ volunteer.name }} | {{ volunteer.pronouns }} | Badge #: {{ volunteer.id }} - County: {{ volunteer.county }}
-          <img alt="Profile Photo" :src="require('@/assets/' + volunteer.name.toLowerCase() + '.jpg')" class="profile-styling" @mouseover="hover = true"
-    @mouseleave="hover = false">
-    <span v-if="hover"> This member is {{ volunteer.active }}.</span>
+          <img alt="Profile Photo" :src="require('@/assets/' + volunteer.name.toLowerCase() + '.jpg')" class="profile-styling" @mouseover="this.$store.state.hover = true"
+    @mouseleave="this.$store.state.hover = false">
+    <span v-if="this.$store.state.hover"> This volunteer is {{ volunteer.active }}.</span>
         </li>
     </ul>
   </div>
 </template>
 <script>
-import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
   setup () {
     const store = useStore()
-    console.log('###CONSOLE LOGGER', store.state.count)
-    const volunteer = computed(() => [
-      { name: 'Davido', pronouns: 'he, him', id: '777', county: 'Orange', active: 'active' },
-      { name: 'Loren', pronouns: 'she, hers', id: '333', county: 'Sarasota', active: 'active' },
-      { name: 'Gemma', pronouns: 'they, them', id: '111', county: 'Miami', active: 'inactive' }
-    ])
-    return { volunteer }
-  },
-  data () {
-    return {
-      volunteers: [
-        { name: 'Davido', pronouns: 'he, him', id: '777', county: 'Orange', active: 'active' },
-        { name: 'Loren', pronouns: 'she, hers', id: '333', county: 'Sarasota', active: 'active' },
-        { name: 'Gemma', pronouns: 'they, them', id: '111', county: 'Miami', active: 'inactive' }
-      ],
-      hover: false
-    }
   }
 }
 </script>
