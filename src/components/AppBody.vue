@@ -5,7 +5,6 @@
     <ul v-for="(volunteer, v) in this.$store.state.volunteers" :key="v" @mouseover="this.$store.state.hover = true"
     @mouseleave="this.$store.state.hover = false" class="list-format flex-container">
         <li>
-          <div>Database Entry: {{ v }}</div>
           <div>
           {{ volunteer.name }} | {{ volunteer.pronouns }}
           </div>
@@ -18,10 +17,10 @@
     </ul>
   </div>
   <div v-else>
-    <ul v-for="(volunteer, v) in this.$store.state.volunteers" :key="v" @mouseover="this.$store.state.hover = true"
+    <ul v-for="(volunteer, v) in this.$store.state.volunteers.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+" :key="v" @mouseover="this.$store.state.hover = true"
     @mouseleave="this.$store.state.hover = false" class="list-format flex-container">
       <li>
-        <div>  Entry: {{ v }}</div>
         <div>
         {{ volunteer.name }} | {{ volunteer.pronouns }}
         </div>
@@ -40,8 +39,7 @@ import { useStore } from 'vuex'
 export default {
   setup () {
     const store = useStore()
-    const volunteerSortName = store.state.volunteers.map(volunteer => volunteer.name).sort()
-    console.log('Sort: ', volunteerSortName)
+    const volunteerMap = store.state.volunteers
   }
 }
 </script>
