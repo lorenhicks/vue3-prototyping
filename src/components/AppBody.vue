@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <span><input type="checkbox" id="name-checkbox" @click="this.$store.state.sortName = !this.$store.state.sortName" >
+  <label for="name-checkbox">Sort by name</label></span>
+  <div v-if="this.$store.state.sortName === false">
     <ul v-for="(volunteer, v) in this.$store.state.volunteers" :key="v" @mouseover="this.$store.state.hover = true"
     @mouseleave="this.$store.state.hover = false" class="list-format flex-container">
         <li>
@@ -15,6 +17,22 @@
         </li>
     </ul>
   </div>
+  <div v-else>
+    <ul v-for="(volunteer, v) in this.$store.state.volunteers" :key="v" @mouseover="this.$store.state.hover = true"
+    @mouseleave="this.$store.state.hover = false" class="list-format flex-container">
+      <li>
+        <div>  Entry: {{ v }}</div>
+        <div>
+        {{ volunteer.name }} | {{ volunteer.pronouns }}
+        </div>
+        <div>
+          Badge #: {{ volunteer.id }} - County: {{ volunteer.county }}
+        </div>
+        <img alt="Profile Photo" :src="require('@/assets/' + volunteer.name.toLowerCase() + '.jpg')" class="profile-styling">
+        <span v-if="this.$store.state.hover" class="active-style"> Status: {{ volunteer.active.toUpperCase() }}</span>
+        </li>
+    </ul>
+  </div>
 </template>
 <script>
 import { useStore } from 'vuex'
@@ -22,6 +40,8 @@ import { useStore } from 'vuex'
 export default {
   setup () {
     const store = useStore()
+    const volunteerSortName = store.state.volunteers.map(volunteer => volunteer.name).sort()
+    console.log('Sort: ', volunteerSortName)
   }
 }
 </script>
