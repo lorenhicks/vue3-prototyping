@@ -25,7 +25,7 @@
   <div v-else>
     <ul v-for="(volunteer, v) in this.$store.state.volunteers.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
 " :key="v" @mouseover="this.$store.state.hover = true"
-    @mouseleave="this.$store.state.hover = false" class="list-format flex-container">
+    @mouseleave="this.$store.state.hover = false" class="list-format flex-container"  :style="this.$store.state.badge.length < 3 || volunteer.id === this.$store.state.badge ? 'display: block' : 'display: none'">
       <li>
         <div>
         {{ volunteer.name }} | {{ volunteer.pronouns }}
