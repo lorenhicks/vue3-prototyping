@@ -2,7 +2,7 @@
   <span><input type="checkbox" id="name-checkbox" @click="this.$store.state.sortName = !this.$store.state.sortName" >
   <label for="name-checkbox">Sort by name</label></span>
   ||
-  <span>Search by badge #: <input v-model="this.$store.state.badge" placeholder="***" size="3" maxlength="3" /></span><span style="color:red" @click="this.$store.state.badge = ''"> X Clear filter</span>
+  <span>Search by badge #: <input v-model="this.$store.state.badge" placeholder="***" size="3" maxlength="3" /></span><span style="color:red" class="pointer" @click="this.$store.state.badge = ''"> X Clear filter</span>
   <br />
   <div>
     Results for badge #{{ this.$store.state.badge }}
@@ -75,5 +75,8 @@ export default {
     top: -20px;
     left: 40px;
     text-align: center;
+  }
+  .pointer {
+    cursor: -webkit-pointer; cursor: pointer;
   }
 </style>
