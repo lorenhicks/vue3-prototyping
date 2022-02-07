@@ -10,7 +10,7 @@
   <div v-if="this.$store.state.sortName === false">
     <ul v-for="(volunteer, v) in this.$store.state.volunteers" :key="v" @mouseover="this.$store.state.hover = true"
     @mouseleave="this.$store.state.hover = false" class="list-format flex-container"  :style="this.$store.state.badge.length < 3 || volunteer.id === this.$store.state.badge ? 'display: block' : 'display: none'">
-        <li>
+        <li @click="$log(this.$store.state.sortName)">
           <div>
           {{ volunteer.name }} | {{ volunteer.pronouns }}
           </div>
@@ -45,7 +45,6 @@ import { useStore } from 'vuex'
 export default {
   setup () {
     const store = useStore()
-    const volunteerMap = store.state.volunteers
   }
 }
 </script>
