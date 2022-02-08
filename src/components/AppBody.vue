@@ -12,7 +12,7 @@
     @mouseleave="this.$store.state.hover = false" class="list-format flex-container"  :style="this.$store.state.badge.length < 3 || volunteer.id === this.$store.state.badge ? 'display: block' : 'display: none'">
         <li @click="$log(this.$store.state.sortName)">
           <div>
-          {{ volunteer.name }} | {{ volunteer.pronouns }}
+          {{ volunteer.name }} | {{ volunteer.pronouns }} | {{ counter }}
           </div>
           <div>
             Badge #{{ volunteer.id }} - County: {{ volunteer.county }}
@@ -41,10 +41,23 @@
 </template>
 <script>
 import { useStore } from 'vuex'
-
+import { computed } from 'vue'
 export default {
-  setup () {
+  props: {
+    name: String,
+    count: Number,
+    sortName: Boolean,
+    volunteers: { type: Array, required: false, default: () => [{ name: '', pronouns: '', id: Number, county: '', active: '' }] },
+    author: Object,
+    callback: Function,
+    contactsPromise: Promise
+  },
+  setup (props) {
     const store = useStore()
+    console.log('CONSOLE LOGGER', props.volunteers)
+    return {
+      counter: computed(() => store.state.count)
+    }
   }
 }
 </script>
