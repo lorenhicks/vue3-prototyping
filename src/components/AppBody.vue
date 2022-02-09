@@ -1,13 +1,13 @@
 <template>
-  <span><input type="checkbox" id="name-checkbox" @click="this.$store.state.sortName = !this.$store.state.sortName" >
-  <label for="name-checkbox">Sort by name</label></span>
+  <span @click="sorted" class="pointer filter">Sort by name</span>
   ||
-  <span>Search by badge #: <input v-model="this.$store.state.badge" placeholder="***" size="3" maxlength="3" /></span><span style="color:red" class="pointer" @click="this.$store.state.badge = ''"> X Clear filter</span>
+  <span class="filter">Search by badge #: <input v-model="this.$store.state.badge" placeholder="***" size="3" maxlength="3" /></span><span class="pointer clear" @click="unsorted"> X Clear filters</span>
   <br />
-  <div>
+  <br />
+  <div v-if="this.$store.state.badge.length > 2" class="results">
     Results for badge #{{ this.$store.state.badge }}
   </div>
-  <div v-if="this.$store.state.sortName === false">
+  <div>
     <ul v-for="(volunteer, v) in this.$store.state.volunteers" :key="v" @mouseover="this.$store.state.hover = true"
     @mouseleave="this.$store.state.hover = false" class="list-format flex-container"  :style="this.$store.state.badge.length < 3 || volunteer.id === this.$store.state.badge ? 'display: block' : 'display: none'">
         <li @click="increment">
@@ -18,43 +18,23 @@
             Badge #{{ volunteer.id }} - County: {{ volunteer.county }}
           </div>
           <img alt="Profile Photo" :src="require('@/assets/' + volunteer.name.toLowerCase() + '.jpg')" class="profile-styling">
-    <span v-if="this.$store.state.hover" class="active-style"> Status: {{ volunteer.active.toUpperCase() }}</span>
-        </li>
-    </ul>
-  </div>
-  <div v-else>
-    <ul v-for="(volunteer, v) in this.$store.state.volunteers.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
-" :key="v" @mouseover="this.$store.state.hover = true"
-    @mouseleave="this.$store.state.hover = false" class="list-format flex-container"  :style="this.$store.state.badge.length < 3 || volunteer.id === this.$store.state.badge ? 'display: block' : 'display: none'">
-      <li>
-        <div>
-        {{ volunteer.name }} | {{ volunteer.pronouns }}
-        </div>
-        <div>
-          Badge #{{ volunteer.id }} - County: {{ volunteer.county }}
-        </div>
-        <img alt="Profile Photo" :src="require('@/assets/' + volunteer.name.toLowerCase() + '.jpg')" class="profile-styling">
-        <span v-if="this.$store.state.hover" class="active-style"> Status: {{ volunteer.active.toUpperCase() }}</span>
+          <span v-if="this.$store.state.hover" class="active-style"> Status: {{ volunteer.active.toUpperCase() }}</span>
         </li>
     </ul>
   </div>
 </template>
 <script>
 import { useStore } from 'vuex'
-import { computed } from 'vue'
 export default {
   setup () {
     const store = useStore()
-    console.log('CONSOLE LOGGER', store.state.count)
   },
   methods: {
-    increment () {
-      this.$store.commit('increment')
-    }
-  },
-  computed: {
-    count () {
-      return this.$store.state.count
+    sorted () {
+      this.$store.commit('sorted')
+    },
+    unsorted () {
+      this.$store.commit('unsorted')
     }
   }
 }
@@ -88,5 +68,23 @@ export default {
   }
   .pointer {
     cursor: -webkit-pointer; cursor: pointer;
+  }
+  .filter {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgb(0, 0, 102);
+    text-transform: uppercase;
+  }
+  .clear {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgb(248, 6, 6);
+    text-transform: uppercase;
+  }
+  .results {
+    font-size: 18px;
+    font-weight: 700;
+    color: rgb(51, 51, 141);
+    text-transform: uppercase;
   }
 </style>

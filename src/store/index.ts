@@ -13,8 +13,12 @@ export default createStore({
     ]
   },
   mutations: {
-    increment (state) {
-      state.count++
+    sorted (state) {
+      state.volunteers.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+    },
+    unsorted (state) {
+      state.volunteers.sort((a, b) => (b.name > a.name) ? 1 : ((a.name > b.name) ? -1 : 0))
+      state.badge = ''
     }
   },
   actions: {
