@@ -1,4 +1,8 @@
 import { createStore } from 'vuex'
+/* eslint-disable */
+// @ts-ignore
+import { auth } from './auth.module'
+/* eslint-enable */
 
 export default createStore({
   state: {
@@ -24,5 +28,6 @@ export default createStore({
   actions: {
   },
   modules: {
+    auth
   }
 })
