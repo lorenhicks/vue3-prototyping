@@ -10,9 +10,9 @@
   <div v-if="this.$store.state.sortName === false">
     <ul v-for="(volunteer, v) in this.$store.state.volunteers" :key="v" @mouseover="this.$store.state.hover = true"
     @mouseleave="this.$store.state.hover = false" class="list-format flex-container"  :style="this.$store.state.badge.length < 3 || volunteer.id === this.$store.state.badge ? 'display: block' : 'display: none'">
-        <li @click="$log(this.$store.state.sortName)">
+        <li @click="increment">
           <div>
-          {{ volunteer.name }} | {{ volunteer.pronouns }} | {{ counter }}
+          {{ volunteer.name }} | {{ volunteer.pronouns }}
           </div>
           <div>
             Badge #{{ volunteer.id }} - County: {{ volunteer.county }}
@@ -43,20 +43,18 @@
 import { useStore } from 'vuex'
 import { computed } from 'vue'
 export default {
-  props: {
-    name: String,
-    count: Number,
-    sortName: Boolean,
-    volunteers: { type: Array, required: false, default: () => [{ name: '', pronouns: '', id: Number, county: '', active: '' }] },
-    author: Object,
-    callback: Function,
-    contactsPromise: Promise
-  },
-  setup (props) {
+  setup () {
     const store = useStore()
-    console.log('CONSOLE LOGGER', props.volunteers)
-    return {
-      counter: computed(() => store.state.count)
+    console.log('CONSOLE LOGGER', store.state.count)
+  },
+  methods: {
+    increment () {
+      this.$store.commit('increment')
+    }
+  },
+  computed: {
+    count () {
+      return this.$store.state.count
     }
   }
 }
