@@ -1,25 +1,57 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/Home.vue'
-
-const routes: Array<RouteRecordRaw> = [
+import { createWebHistory, createRouter } from 'vue-router'
+import Home from '../components/Home.vue'
+import Login from '../components/Login.vue'
+import Register from '../components/Register.vue'
+// lazy-loaded
+const Profile = () => import('../components/Profile.vue')
+const BoardAdmin = () => import('../components/BoardAdmin.vue')
+const BoardModerator = () => import('../components/BoardModerator.vue')
+const BoardUser = () => import('../components/BoardUser.vue')
+const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'home',
+    component: Home,
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+    path: '/home',
+    component: Home,
+  },
+  {
+    path: '/login',
+    component: Login,
+  },
+  {
+    path: '/register',
+    component: Register,
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    // lazy-loaded
+    component: Profile,
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    // lazy-loaded
+    component: BoardAdmin,
+  },
+  {
+    path: '/mod',
+    name: 'moderator',
+    // lazy-loaded
+    component: BoardModerator,
+  },
+  {
+    path: '/user',
+    name: 'user',
+    // lazy-loaded
+    component: BoardUser,
+  },
 ]
-
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
+  history: createWebHistory(),
+  routes,
 })
-
 export default router
