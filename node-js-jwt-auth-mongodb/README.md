@@ -24,6 +24,29 @@ Expected Response:
     "message": "User was registered successfully!"
 }
 
+Signing in user and generating access token
+http://localhost:8080/api/auth/signin
+{
+    "username": "lolo",
+    "password": "123456"
+}
+Postman payload to create new user 
+- POST Request
+- Body
+- raw > JSON
+- Send
+Expected Response:
+{
+    "id": "620aa5942acff608bc58a85d",
+    "username": "lolo",
+    "email": "lo@lo.com",
+    "roles": [
+        "ROLE_USER",
+        "ROLE_MODERATOR"
+    ],
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMGFhNTk0MmFjZmY2MDhiYzU4YTg1ZCIsImlhdCI6MTY0NDk1NDMwNywiZXhwIjoxNjQ1MDQwNzA3fQ.nXF-fovR82zxh12kKJfn3LFxTMNQZav_-vpPUdwXghU"
+}
+
 Accessing public content
 http://localhost:8080/api/test/all
 No payload needed
@@ -48,3 +71,7 @@ Value: User's unique 'accessToken' generated during signin
 - GET
 Expected response:
 User Content.
+```
+
+### Multiple servers
+Start MongoDB first and then npm run serve the codebase. It should start running on localhost:8081
