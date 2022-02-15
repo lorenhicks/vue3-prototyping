@@ -71,6 +71,16 @@ Value: User's unique 'accessToken' generated during signin
 - GET
 Expected response:
 User Content.
+
+Accessing moderator features
+http://localhost:8080/api/test/mod
+Headers
+Key: x-access-token
+Value: User's unique 'accessToken' generated during signin after refreshToken generated
+- GET
+Expected response:
+Moderator Content.
+
 ```
 
 ### Multiple servers

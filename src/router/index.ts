@@ -5,53 +5,53 @@ import Register from '../components/Register.vue'
 // lazy-loaded
 const Profile = () => import('../components/Profile.vue')
 const BoardAdmin = () => import('../components/BoardAdmin.vue')
-const BoardModerator = () => import('../components/BoardModerator.vue')
+const MVPortal = () => import('../components/MVPortal.vue')
 const BoardUser = () => import('../components/BoardUser.vue')
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home,
+    component: Home
   },
   {
     path: '/home',
-    component: Home,
+    component: Home
   },
   {
     path: '/login',
-    component: Login,
+    component: Login
   },
   {
     path: '/register',
-    component: Register,
+    component: Register
   },
   {
     path: '/profile',
     name: 'profile',
     // lazy-loaded
-    component: Profile,
+    component: Profile
   },
   {
     path: '/admin',
     name: 'admin',
     // lazy-loaded
-    component: BoardAdmin,
+    component: BoardAdmin
   },
   {
     path: '/mod',
     name: 'moderator',
     // lazy-loaded
-    component: BoardModerator,
+    component: MVPortal
   },
   {
     path: '/user',
     name: 'user',
     // lazy-loaded
-    component: BoardUser,
-  },
+    component: BoardUser
+  }
 ]
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes
 })
 export default router
