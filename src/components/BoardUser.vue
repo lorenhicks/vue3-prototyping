@@ -1,7 +1,7 @@
 <template>
   <div class='container'>
     <header class='jumbotron'>
-      <h3>{{ content }}</h3>
+      <h3>{{currentUser.username}} your id number is <strong>{{currentUser.id}}</strong></h3>
     </header>
   </div>
 </template>
@@ -11,23 +11,20 @@ export default {
   name: 'User',
   data () {
     return {
-      content: '',
+      content: ''
+    }
+  },
+  computed: {
+    currentUser () {
+      return this.$store.state.auth.user
     }
   },
   mounted () {
     UserService.getUserBoard().then(
       (response) => {
         this.content = response.data
-      },
-      (error) => {
-        this.content =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString()
       }
     )
-  },
+  }
 }
 </script>

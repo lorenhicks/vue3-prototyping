@@ -13,8 +13,8 @@
       Use the navigation options at the top of the screen to:
       <ul>
         <li>Search the <strong>MVPortal Database</strong></li>
-        <li>Update your voluneer information</li>
-        <li>View or change your account settings</li>
+        <li>Find your MVP id information under <strong>MyInfo</strong></li>
+        <li>View your account settings</li>
       </ul>
     </p>
     <p>

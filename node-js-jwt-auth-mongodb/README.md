@@ -30,7 +30,7 @@ http://localhost:8080/api/auth/signin
     "username": "lolo",
     "password": "123456"
 }
-Postman payload to create new user 
+Postman payload to sign in
 - POST Request
 - Body
 - raw > JSON
