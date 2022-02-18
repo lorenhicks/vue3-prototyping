@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const config = require("../app/config/auth.config");
+const config = require("../config/auth.config");
 const { v4: uuidv4 } = require('uuid');
 const RefreshTokenSchema = new mongoose.Schema({
   token: String,
